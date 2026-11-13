@@ -878,7 +878,13 @@ class GeminiLiveVoiceEngine(
                 LiveVoiceError(
                     category = LiveErrorCategory.AUTHENTICATION,
                     httpStatus = httpCode ?: 403,
-                    message = "Gemini Live authentication or App Check verification failed (HTTP ${httpCode ?: 403}). Verify Firebase AI Logic & App Check configuration."
+                    message = buildString {
+                        append("Gemini Live authentication or App Check verification failed (HTTP ${httpCode ?: 403}). ")
+                        append("Use a Release APK (with reCAPTCHA App Check), or register this device's Debug Token in Firebase App Check.")
+                        if (msg.isNotBlank()) {
+                            append(" Details: ${msg.take(180)}")
+                        }
+                    }
                 )
 
             httpCode == 404 ||

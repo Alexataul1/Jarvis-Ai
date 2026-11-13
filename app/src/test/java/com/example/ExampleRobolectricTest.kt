@@ -31,9 +31,12 @@ import org.robolectric.annotation.Config
 class ExampleRobolectricTest {
 
     @Test
-    fun `app name remains Jarvis`() {
+    fun `app name remains Jarvis and recaptcha site key is configured`() {
         val context = ApplicationProvider.getApplicationContext<Context>()
         assertEquals("Jarvis", context.getString(R.string.app_name))
+        val resId = context.resources.getIdentifier("recaptcha_site_key", "string", context.packageName)
+        assertTrue("recaptcha_site_key must exist for Release APK App Check", resId != 0)
+        assertTrue("recaptcha_site_key must be non-blank", context.getString(resId).isNotBlank())
     }
 
     @Test

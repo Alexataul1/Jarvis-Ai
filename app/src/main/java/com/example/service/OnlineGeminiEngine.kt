@@ -363,7 +363,13 @@ class OnlineGeminiEngine(
                 OnlineGeminiException(
                     category = OnlineErrorCategory.AUTHENTICATION,
                     httpStatus = httpCode ?: 403,
-                    userMessage = "Firebase AI authentication or App Check verification failed (HTTP ${httpCode ?: 403}). Verify Firebase AI Logic & App Check setup.",
+                    userMessage = buildString {
+                        append("Firebase AI authentication or App Check verification failed (HTTP ${httpCode ?: 403}). ")
+                        append("Use a signed Release APK (with reCAPTCHA App Check configured), or register this device's Debug Token in Firebase App Check.")
+                        if (msg.isNotBlank()) {
+                            append(" Details: ${msg.take(180)}")
+                        }
+                    },
                     retryable = false,
                     cause = t
                 )
