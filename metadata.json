@@ -1,0 +1,6 @@
+{
+  "name": "Jarvis",
+  "description": "Smart Jarvis AI Assistant with ChatGPT-style voice chat, offline on-device actions, contacts, app launcher, and biometric security.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
